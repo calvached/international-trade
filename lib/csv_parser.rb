@@ -1,7 +1,7 @@
 require 'csv'
 
 class CsvParser
-  def parse_file(file)
+  def parse_csv(file)
     parsed_data = []
 
     CSV.foreach(file, :headers => true) do |transaction|
