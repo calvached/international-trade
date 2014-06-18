@@ -3,7 +3,7 @@ require 'csv_parser'
 describe CsvParser do
   it 'formats data' do
     parser = CsvParser.new
-    expect(parser.parse_csv('spec/SAMPLE_TRANS.csv')).to eq(
+    expect(parser.parse('spec/SAMPLE_TRANS.csv')).to eq(
       [
         {'store' => 'Yonkers', 'sku' => 'DM1210', 'amount' => '70.00 USD'},
         {'store' => 'Yonkers', 'sku' => 'DM1182', 'amount' => '19.68 AUD'},
