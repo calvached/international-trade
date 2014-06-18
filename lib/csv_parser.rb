@@ -15,7 +15,8 @@ class CsvParser
     {
      'store'  => transaction['store'],
      'sku'    => transaction['sku'],
-     'amount' => transaction['amount']
+     'amount' => transaction['amount'].split[0].to_f,
+     'origin' => transaction['amount'].split[1]
     }
   end
 end
