@@ -4,20 +4,15 @@ describe CurrencyConverter do
   let(:converter) { CurrencyConverter.new('spec/rates.xml') }
 
   it 'converts currency' do
-    sale = {'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '60.10 CAD'}
-    sale_2 = {'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '50.00 AUD'}
-    expect(converter.convert(sale, 'USD')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '60.64 USD'})
-    expect(converter.convert(sale_2, 'EUR')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '37.2 EUR'})
-  end
-
-  it 'returns the origin country' do
-    sale = {"store"=>"Nashua", "sku"=>"DM1182", "amount"=>"60.10 CAD"}
-    expect(converter.origin_country_of(sale)).to eq('CAD')
+    sale = {'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => 60.10, 'origin' => 'CAD'}
+    sale_2 = {'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => 50.00, 'origin' =>'AUD'}
+    expect(converter.convert(sale, 'USD')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => 60.64, 'origin' => 'USD'})
+    expect(converter.convert(sale_2, 'EUR')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => 37.2, 'origin' => 'EUR'})
   end
 
   it 'returns a converted amount' do
-    rate = {"from"=>"AUD", "to"=>"CAD", "conversion"=>"2.00"}
-    sale = {"store"=>"Nashua", "sku"=>"DM1182", "amount"=>"60.00 AUD"}
+    rate = {"from"=>"AUD", "to"=>"CAD", "conversion" => 2.00}
+    sale = {"store"=>"Nashua", "sku"=>"DM1182", "amount" => 60.00, 'origin' => 'AUD'}
 
     expect(converter.get_converted_amount(sale, rate)).to eq(120.00)
   end

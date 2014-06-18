@@ -5,10 +5,11 @@ class CurrencyConverter
 
   def convert(sale, destination_country)
     @rates.each do |rate|
-      if origin_country_of(sale) == rate['from'] && destination_country == rate['to']
+      if sale['origin'] == rate['from'] && destination_country == rate['to']
         converted_amount = get_converted_amount(sale, rate)
 
-        sale['amount'] = "#{bankers_round(converted_amount)} #{destination_country}"
+        sale['amount'] = bankers_round(converted_amount) 
+        sale['origin'] = destination_country
       end
     end
 
@@ -16,11 +17,7 @@ class CurrencyConverter
   end
 
   def get_converted_amount(sale, rate)
-    rate['conversion'].to_f * sale['amount'][0..-5].to_f
-  end
-
-  def origin_country_of(sale)
-    sale['amount'].split[1]
+    rate['conversion'] * sale['amount']
   end
 
   def bankers_round(amount)
