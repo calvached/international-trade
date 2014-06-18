@@ -12,7 +12,9 @@ class XmlParser
   end
 
   def format_rate(data_set)
-    Hash[*data_set.flatten]
+    rate = Hash[*data_set.flatten]
+    rate['conversion'] = rate['conversion'].to_f
+    rate
   end
 
   def extract_data_sets(row)
