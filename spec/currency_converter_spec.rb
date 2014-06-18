@@ -3,9 +3,11 @@ require 'currency_converter'
 describe CurrencyConverter do
   let(:converter) { CurrencyConverter.new('spec/rates.xml') }
 
-  it 'converts a non-USD amount to USD' do
+  it 'converts currency' do
     amount = {'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '60.10 CAD'}
-    expect(converter.convert_to(amount, 'USD')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '60.64 USD'})
+    amount_2 = {'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '50.00 AUD'}
+    expect(converter.convert(amount, 'USD')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '60.64 USD'})
+    expect(converter.convert(amount_2, 'EUR')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '37.2 EUR'})
   end
 
   it 'returns the origin country' do
@@ -17,7 +19,7 @@ describe CurrencyConverter do
     rate = {"from"=>"AUD", "to"=>"CAD", "conversion"=>"2.00"}
     sale = {"store"=>"Nashua", "sku"=>"DM1182", "amount"=>"60.00 AUD"}
 
-    expect(converter.converting(sale, rate)).to eq(120.00)
+    expect(converter.get_converted_amount(sale, rate)).to eq(120.00)
   end
 
   it 'returns a rounded amount using bankers round' do
