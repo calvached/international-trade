@@ -3,10 +3,10 @@ class CurrencyConverter
     @rates = XmlParser.new.parse_xml(file)
   end
 
-  def convert_to(sale, destination_country)
+  def convert(sale, destination_country)
     @rates.each do |rate|
       if origin_country_of(sale) == rate['from'] && destination_country == rate['to']
-        converted_amount = converting(sale, rate)
+        converted_amount = get_converted_amount(sale, rate)
 
         sale['amount'] = "#{bankers_round(converted_amount)} #{destination_country}"
       end
@@ -15,7 +15,7 @@ class CurrencyConverter
     sale
   end
 
-  def converting(sale, rate)
+  def get_converted_amount(sale, rate)
     rate['conversion'].to_f * sale['amount'][0..-5].to_f
   end
 
