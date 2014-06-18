@@ -4,10 +4,10 @@ describe CurrencyConverter do
   let(:converter) { CurrencyConverter.new('spec/rates.xml') }
 
   it 'converts currency' do
-    amount = {'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '60.10 CAD'}
-    amount_2 = {'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '50.00 AUD'}
-    expect(converter.convert(amount, 'USD')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '60.64 USD'})
-    expect(converter.convert(amount_2, 'EUR')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '37.2 EUR'})
+    sale = {'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '60.10 CAD'}
+    sale_2 = {'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '50.00 AUD'}
+    expect(converter.convert(sale, 'USD')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '60.64 USD'})
+    expect(converter.convert(sale_2, 'EUR')).to eq({'store' => 'Nashua', 'sku' => 'DM1182', 'amount' => '37.2 EUR'})
   end
 
   it 'returns the origin country' do
