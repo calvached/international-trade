@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
+require 'sales'
+
+trade = Sales.new('../lib/SAMPLE_TRANS.csv')
+p trade.run(ARGV[0])
