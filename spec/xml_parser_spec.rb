@@ -25,24 +25,20 @@ describe XmlParser do
   it 'extracts data labels with their cooresponding values' do
     test_row = ["\n\t\t<from>AUD</from>\n\t\t<to>CAD</to>\n\t\t<conversion>1.0079</conversion>\n\t"]
 
-    expect(parser.extract_data_sets(test_row)).to eq([["from", "AUD"], ["to", "CAD"], ["conversion", "1.0079"]])
+    expect(parser.extract_data_sets(test_row)).to eq(["AUDCAD", 1.0079])
   end
 
   it 'formats a row of data' do
-    test_row = [["from", "AUD"], ["to", "CAD"], ["conversion", "1.0079"]]
+    test_row = [["AUDCAD", 1.0079], ['AUDEUR', 2.023], ['CADUSD', 1.789]]
 
-    expect(parser.format_rate(test_row)).to eq({"from"=>"AUD", "to"=>"CAD", "conversion"=>1.0079})
+    expect(parser.format_rate(test_row)).to eq(
+      {"AUDCAD"=>1.0079, "AUDEUR"=>2.023, "CADUSD"=>1.789})
   end
 
   it 'returns formatted data sets' do
     expect(parser.parse_xml('spec/rates.xml')).to eq(
-      [
-        {'from' => 'AUD', 'to' => 'CAD', 'conversion' => 1.0079},
-        {'from' => 'AUD', 'to' => 'EUR', 'conversion' => 0.7439},
-        {'from' => 'CAD', 'to' => 'AUD', 'conversion' => 0.9921},
-        {'from' => 'CAD', 'to' => 'USD', 'conversion' => 1.0090},
-        {'from' => 'EUR', 'to' => 'AUD', 'conversion' => 1.3442},
-        {'from' => 'USD', 'to' => 'CAD', 'conversion' => 0.9911},
-      ])
+        { 'AUDCAD' => 1.0079, 'AUDEUR' => 0.7439,
+          'CADAUD' => 0.9921, 'CADUSD' => 1.0090,
+          'EURAUD' => 1.3442, 'USDCAD' => 0.9911 })
   end
 end
