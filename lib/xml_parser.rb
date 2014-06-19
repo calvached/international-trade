@@ -4,21 +4,22 @@ class XmlParser
     parsed_data = []
 
     parse_rates(xml_string).each do |row|
-      data_set = extract_data_sets(row)
-      parsed_data << format_rate(data_set)
+      parsed_data << extract_data_sets(row)
     end
 
-    parsed_data
+    format_rate(parsed_data)
   end
 
   def format_rate(data_set)
-    rate = Hash[*data_set.flatten]
-    rate['conversion'] = rate['conversion'].to_f
-    rate
+    Hash[*data_set.flatten]
   end
 
   def extract_data_sets(row)
-    row[0].scan(/<(\w+)>(\w+\.?\d*)/)
+    data_sets = []
+    matches = row[0].scan(/<\w+>(\w+\.?\d*)/).flatten
+    data_sets << matches[0] + matches[1]
+    data_sets << matches[2].to_f
+    data_sets
   end
 
   def parse_rates(string)
@@ -29,3 +30,4 @@ class XmlParser
     File.read(file)
   end
 end
+
