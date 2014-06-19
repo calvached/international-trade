@@ -1,7 +1,7 @@
 require 'currency_converter'
 
 describe CurrencyConverter do
-  let(:converter) { CurrencyConverter.new }
+  let(:converter) { CurrencyConverter.new(file: 'spec/rates.xml') }
 
   it 'converts currency when direct conversion rate exists' do
     expect(converter.convert(60.10, 'CADUSD')).to eq(60.64)
