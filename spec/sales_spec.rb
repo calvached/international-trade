@@ -1,7 +1,7 @@
 require 'sales'
 
 describe Sales do
-  let(:sales) { Sales.new('spec/SAMPLE_TRANS.csv') }
+  let(:sales) { Sales.new('data/SAMPLE_TRANS.csv') }
 
   it 'filters a list by the given sku' do
     expect(sales.filter_by('DM1182')).to eq(

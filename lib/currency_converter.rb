@@ -2,7 +2,7 @@ require_relative 'xml_parser'
 
 class CurrencyConverter
   def initialize(params = {})
-    @rates = XmlParser.new.parse_xml(params.fetch(:file, 'spec/rates.xml'))
+    @rates = XmlParser.new.parse_xml(params.fetch(:file, 'data/rates.xml'))
   end
 
   def convert(amount, conversion)

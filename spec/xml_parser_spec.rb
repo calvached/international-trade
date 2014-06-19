@@ -4,7 +4,7 @@ describe XmlParser do
   let(:parser) { XmlParser.new }
 
   it 'reads a file' do
-   expect(parser.read('spec/rates.xml')).to be_a(String)
+   expect(parser.read('data/rates.xml')).to be_a(String)
   end
 
   it 'returns each set of rates' do
@@ -36,7 +36,7 @@ describe XmlParser do
   end
 
   it 'returns formatted data sets' do
-    expect(parser.parse_xml('spec/rates.xml')).to eq(
+    expect(parser.parse_xml('data/rates.xml')).to eq(
         { 'AUDCAD' => 1.0079, 'AUDEUR' => 0.7439,
           'CADAUD' => 0.9921, 'CADUSD' => 1.0090,
           'EURAUD' => 1.3442, 'USDCAD' => 0.9911 })
