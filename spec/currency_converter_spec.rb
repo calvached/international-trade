@@ -32,7 +32,7 @@ describe CurrencyConverter do
   end
 
   it 'returns the digits after the decimal in the amount' do
-    expect(converter.last_two_digits(54.18)).to eq(18)
-    expect(converter.last_two_digits(343.20)).to eq(2)
+    expect(converter.last_digits(54.18)).to eq(18)
+    expect(converter.last_digits(343.20)).to eq(2)
   end
 end
