@@ -3,9 +3,9 @@ require_relative 'currency_converter'
 
 class Sales
   attr_accessor :converter
-  def initialize(file)
-    @sales = CsvParser.new.parse(file)
-    @converter = CurrencyConverter.new
+  def initialize(transaction_file = 'data/SAMPLE_TRANS.csv', rates_file = 'data/rates.xml')
+    @sales = CsvParser.new.parse(transaction_file)
+    @converter = CurrencyConverter.new(rates_file)
   end
 
   def run(sku)
