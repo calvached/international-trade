@@ -11,6 +11,7 @@ class CsvParser
    parsed_data
   end
 
+  private
   def format_data(transaction)
     {
      'store'  => transaction['store'],

@@ -16,10 +16,6 @@ class CurrencyConverter
     end
   end
 
-  def get_converted_amount(amount, rate)
-    amount * rate
-  end
-
   def bankers_round(amount)
     three_decimal_amount = round_to_three_decimals(amount)
     rounded_amount = standard_round(three_decimal_amount)
@@ -29,6 +25,11 @@ class CurrencyConverter
     else
       rounded_amount - 0.01
     end
+  end
+
+  private
+  def get_converted_amount(amount, rate)
+    amount * rate
   end
 
   def last_digits(amount)

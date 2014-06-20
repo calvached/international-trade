@@ -3,5 +3,5 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'sales'
 
-trade = Sales.new('../data/SAMPLE_TRANS.csv', '../data/rates.xml')
-p trade.run(ARGV[0])
+sale = Sales.new('../data/SAMPLE_TRANS.csv', '../data/rates.xml')
+p sale.total(ARGV[0])

@@ -10,6 +10,7 @@ class XmlParser
     format_rate(parsed_data)
   end
 
+  private
   def format_rate(data_set)
     Hash[*data_set.flatten]
   end
