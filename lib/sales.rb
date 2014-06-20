@@ -8,33 +8,15 @@ class Sales
     @converter = CurrencyConverter.new(rates_file)
   end
 
-  def run(sku)
-    filtered_sales = filter_by(sku)
-    converted_usd_sales = to_usd(filtered_sales)
-    total(converted_usd_sales)
-  end
-
-  def to_usd(sales)
-    amounts = []
-
-    sales.each do |sale|
-     amounts <<  @converter.convert(sale['amount'], sale['origin'] + 'USD')
-    end
-
-    amounts
-  end
-
-  def filter_by(sku)
-    filtered_sales = []
+  def total(sku)
+    current_total = 0
 
     @sales.each do |sale|
-      filtered_sales << sale if sale['sku'] == sku
+      if sale['sku'] == sku
+        current_total += @converter.convert(sale['amount'], sale['origin'] + 'USD')
+      end
     end
-
-    filtered_sales
+    current_total
   end
 
-  def total(amounts)
-   amounts.reduce(:+)
-  end
 end
