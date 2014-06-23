@@ -1,8 +1,9 @@
 require_relative 'csv_parser'
 require_relative 'currency_converter'
+require 'pry'
 
 class Sales
-  attr_accessor :converter
+  attr_accessor :sales
   def initialize(transaction_file = 'data/SAMPLE_TRANS.csv', rates_file = 'data/rates.xml')
     @sales = CsvParser.new.parse(transaction_file)
     @converter = CurrencyConverter.new(rates_file)

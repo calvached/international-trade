@@ -1,6 +1,7 @@
 require_relative 'xml_parser'
 
 class CurrencyConverter
+  attr_accessor :rates
   def initialize(file = 'data/rates.xml')
     @rates = XmlParser.new.parse_xml(file)
   end
