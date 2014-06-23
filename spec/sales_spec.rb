@@ -4,6 +4,8 @@ describe Sales do
   let(:sales) { Sales.new }
 
   it 'adds all the sales from a given sku' do
-    expect(sales.total('DM1182')).to eq(134.22)
+    CurrencyConverter.any_instance.stub(:convert).and_return(2)
+
+    expect(sales.total('DM1182')).to eq(6)
   end
 end
